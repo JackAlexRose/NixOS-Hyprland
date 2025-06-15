@@ -104,8 +104,6 @@
     shell = pkgs.zsh;
   };
 
-  programs.zsh.enable = true;
-
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -154,7 +152,21 @@
     networkmanagerapplet
     lshw
     git
+    zsh-powerlevel10k
   ];
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+    autosuggestions.enable = true;
+    shellAliases = {
+      update = "sudo nixos-rebuild switch --flake /home/jack/nixos-config";
+    };
+    promptInit = ''
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+    '';
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
