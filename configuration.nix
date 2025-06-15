@@ -120,7 +120,7 @@
   services.xserver.videoDrivers = ["nvidia"];
 
   hardware = {
-    opengl.enable = true;
+    graphics.enable = true;
 
     nvidia = {
       modesetting.enable = true;
@@ -166,6 +166,14 @@
     promptInit = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     '';
+    histSize = 10000;
+    histFile = "$HOME/.zsh_history";
+    setOptions = [
+      "hist_ignore_all_dups"
+      "hist_reduce_blanks"
+      "hist_verify"
+      "hist_ignore_space"
+    ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
