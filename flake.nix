@@ -10,6 +10,7 @@
       url = "github:ghostty-org/ghostty";
     };
     yazi.url = "github:sxyazi/yazi";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs = {
@@ -19,16 +20,15 @@
     alejandra,
     ghostty,
     yazi,
+    zen-browser,
     ...
-  } @ inputs: 
-  let
+  } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       system = system;
       config.allowUnfree = true;
     };
-  in
-  {
+  in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = system;
       modules = [
@@ -38,7 +38,8 @@
             pkgs.code-cursor
             ghostty.packages.${system}.default
             yazi.packages.${system}.default
-            ];
+            zen-browser.packages.${system}.default
+          ];
         }
         ./configuration.nix
         inputs.catppuccin.nixosModules.catppuccin
